@@ -11,4 +11,6 @@ python DAPH_proxy_code.py
 
 
 Then you can train the modality-spcific hashing networks by:
-```python DAPH.py```
+```python 
+python DAPH.py
+```
