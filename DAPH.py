@@ -166,9 +166,9 @@ def DAPH_Algo(opt):
             hash_out = hash_model(train_img)
 
             simxall = train_label.mm(anchor_label.t())
-            positive_select = 1. * (simxall > (train_label.sum(1).view(-1, 1) - 0.2))
+            positive_select = 1. * (simxall > (train_label.sum(1).view(-1, 1) - 0.2)) * (simxall > (anchor_label.sum(1).view(1, -1) - 0.2))
             negtive_select = 1 - 1. * (simxall > 0)
-            partial_positive_select = (1. - negtive_select) * (simxall < (train_label.sum(1).view(-1, 1) - 0.2))
+            partial_positive_select = 1. - positive_select - negtive_select
 
             norm_partial_positive_select = partial_positive_select * simxall / (simxall.sum(1).view(-1, 1) + eps)
 
